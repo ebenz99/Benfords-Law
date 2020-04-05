@@ -10,7 +10,7 @@ public class Main {
         String decision = ip.nextLine();
         if (decision.equals("Whetstone")){
             Whetstone w = new Whetstone();
-            System.out.println("here");
+            w.run();
         }
         return;
     }

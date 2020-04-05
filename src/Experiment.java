@@ -13,5 +13,4 @@ public abstract class Experiment {
     }
 
     public abstract void run();
-    public abstract void generateCommands();
 }

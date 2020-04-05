@@ -8,8 +8,4 @@ public class Zipf extends Experiment {
 
     }
 
-    @Override
-    public void generateCommands() {
-
-    }
 }
