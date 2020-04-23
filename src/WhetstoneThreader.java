@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WhetstoneThreader implements Runnable {
-    private ConcurrentHashMap map;
+    private ConcurrentHashMap cmap;
     private int ID;
 
-    public WhetstoneThreader(ConcurrentHashMap<Integer, String> chMap, int ID) {
-        this.map = chMap;
+    public WhetstoneThreader(ConcurrentHashMap<Integer, int[]> chMap, int ID) {
+        this.cmap = chMap;
         this.ID = ID;
 
     }
@@ -29,17 +29,16 @@ public class WhetstoneThreader implements Runnable {
         return op;
     }
 
-    public void processNumbers(List<String> times){
+    public int[] processNumbers(List<String> times){
         int[] occurrences = new int[10];
 
         for(String time : times){
-            System.out.println(time);
             for(char x : time.toCharArray()){
-                System.out.println(((int) x) - 48);
                 occurrences[((int) x) - 48] += 1;
             }
         }
-        System.out.println(Arrays.toString(occurrences));
+//        System.out.println(Arrays.toString(occurrences));
+        return occurrences;
     }
 
     public List<String> buildCommands(int iterations){
@@ -84,6 +83,7 @@ public class WhetstoneThreader implements Runnable {
             e.printStackTrace();
         }
 
-        processNumbers(times);
+
+        this.cmap.put(this.ID, processNumbers(times));
     }
 }
