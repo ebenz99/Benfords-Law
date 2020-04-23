@@ -13,8 +13,10 @@ public class Whetstone extends Experiment {
             List<String> cmds = new ArrayList<String>();
             cmds.add("/bin/sh");
             cmds.add("-c");
-            cmds.add("sudo -S perf stat ./whetstone 200000");
-            //cmds.add("gcc -o whetstone whetstone.c -lm -O2");
+//            cmds.add("gcc -o whetstone /home/ethan/IdeaProjects/BenfordsLaw/whetstone.c -lm -O2;");
+            cmds.add("sudo -S perf stat ./whetstone 2000");
+//            System.out.println("compiled");
+
             ProcessBuilder p = new ProcessBuilder(cmds);
             p.directory(new File("/home/ethan/code/performance"));
 
@@ -22,6 +24,7 @@ public class Whetstone extends Experiment {
             BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             BufferedReader stderr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
             OutputStream stdin = proc.getOutputStream();
+
 
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
             writer.write((new Login()).getPassword());
