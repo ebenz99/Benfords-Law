@@ -6,18 +6,26 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class Whetstone extends Experiment {
+    private static int[] nums;
+
     public Whetstone(){
         super();
+        this.nums = new int[10];
+    }
+
+    public void culminateNums(int[] arr){
+        for(int i = 0; i < 10; i++){
+            this.nums[i]+=arr[i];
+        }
     }
 
 
     @Override
     public void run() {
         ConcurrentHashMap<Integer, int[]> times = new ConcurrentHashMap<Integer, int[]>();
-
         List<Thread> threads = new ArrayList<Thread>();
 
-        for(int k = 0; k < 5; k++){
+        for(int k = 0; k < 10; k++){
             Runnable r = new WhetstoneThreader(times, k);
             Thread t = new Thread(r);
             t.start();
@@ -33,12 +41,13 @@ public class Whetstone extends Experiment {
         }
 
 
-        System.out.println(times.size());
-
         for(ConcurrentHashMap.Entry<Integer, int[]> entry : times.entrySet()){
-            System.out.println(Arrays.toString(entry.getValue()));
+            culminateNums((entry.getValue()));
         }
 
+        System.out.println(Arrays.toString(this.nums));
 
+        return;
     }
+
 }
